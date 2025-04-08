@@ -89,7 +89,7 @@
     <input type="number" id="subject3" min="0" max="10" step="0.1">
 
     <label for="main">Thành tích chính</label>
-    <select id="main">
+    <select id="main1" class="one">
       <option value="50">Giải Nhất quốc gia</option>
       <option value="45">Giải Nhì quốc gia</option>
       <option value="40">Giải Ba quốc gia</option>
@@ -104,7 +104,55 @@
       <option value="20">Học sinh chuyên</option>
     </select>
 
-    <input type="checkbox" id="chuyen">Hệ chuyên
+    <select id="main2" class="one">
+      <option value="0">Không</option>
+      <option value="50">Giải Nhất quốc gia</option>
+      <option value="45">Giải Nhì quốc gia</option>
+      <option value="40">Giải Ba quốc gia</option>
+      <option value="35">Giải Khuyến khích quốc gia</option>
+      <option value="30">Giải Nhất tỉnh</option>
+      <option value="25">Giải Nhì tỉnh</option>
+      <option value="20">Giải Ba tỉnh</option>
+      <option value="15">Giải Khuyến khích tỉnh</option>
+      <option value="50">Olympia vòng năm</option>
+      <option value="40">Olympia vòng quý</option>
+      <option value="30">Olympia vòng tháng</option>
+      <option value="20">Học sinh chuyên</option>
+    </select>
+
+    <select id="main3" class="one">
+      <option value="0">Không</option>
+      <option value="50">Giải Nhất quốc gia</option>
+      <option value="45">Giải Nhì quốc gia</option>
+      <option value="40">Giải Ba quốc gia</option>
+      <option value="35">Giải Khuyến khích quốc gia</option>
+      <option value="30">Giải Nhất tỉnh</option>
+      <option value="25">Giải Nhì tỉnh</option>
+      <option value="20">Giải Ba tỉnh</option>
+      <option value="15">Giải Khuyến khích tỉnh</option>
+      <option value="50">Olympia vòng năm</option>
+      <option value="40">Olympia vòng quý</option>
+      <option value="30">Olympia vòng tháng</option>
+      <option value="20">Học sinh chuyên</option>
+    </select>
+
+    <select id="main4" class="one">
+      <option value="0">Không</option>
+      <option value="50">Giải Nhất quốc gia</option>
+      <option value="45">Giải Nhì quốc gia</option>
+      <option value="40">Giải Ba quốc gia</option>
+      <option value="35">Giải Khuyến khích quốc gia</option>
+      <option value="30">Giải Nhất tỉnh</option>
+      <option value="25">Giải Nhì tỉnh</option>
+      <option value="20">Giải Ba tỉnh</option>
+      <option value="15">Giải Khuyến khích tỉnh</option>
+      <option value="50">Olympia vòng năm</option>
+      <option value="40">Olympia vòng quý</option>
+      <option value="30">Olympia vòng tháng</option>
+      <option value="20">Học sinh chuyên</option>
+    </select>
+
+    <!-- <input type="checkbox" id="chuyen">Hệ chuyên -->
 
     <label for="bonus">Thành tích thưởng</label>
     <select id="bonus">
@@ -132,15 +180,19 @@
       const math = parseFloat(document.getElementById("math").value) || 0;
       const literature = parseFloat(document.getElementById("literature").value) || 0;
       const subject3 = parseFloat(document.getElementById("subject3").value) || 0;
-      const main = parseFloat(document.getElementById("main").value);
+      const main1 = parseFloat(document.getElementById("main1").value);
+      const main2 = parseFloat(document.getElementById("main2").value);
+      const main3 = parseFloat(document.getElementById("main3").value);
+      const main4 = parseFloat(document.getElementById("main4").value);
       const bonus = parseFloat(document.getElementById("bonus").value);
 
       const academic = ((math * 3 + literature + subject3 * 2) * 4) / 6;
-      const chuyen = document.getElementById("chuyen")
-      const chuyenBonus = chuyen.checked ? 20 : 0;
+      // const chuyen = document.getElementById("chuyen")
+      // const chuyenBonus = chuyen.checked ? 20 : 0;
 
-      const total = Math.min(academic + main + bonus + chuyenBonus, 100);
-
+      // const total = Math.min(academic + main + bonus + chuyenBonus, 100);
+      const main = Math.min(main1 + main2 + main3 + main4, 50);
+      const total = Math.min(academic + main + bonus, 100);
       document.getElementById("result").innerText = `Tổng điểm XTTN của bạn là: ${total.toFixed(2)} / 100`;
     }
 
