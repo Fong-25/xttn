@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tính điểm Xét tuyển tài năng 1.3</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f4f4f4;
+    }
+
+    h2 {
+      color: #333;
+      text-align: center;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    select,
+    input[type=number] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: green;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    img.logo {
+      display: block;
+      margin: 0 auto 20px;
+      max-width: 200px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img src="logo tsa.jpg" alt="Logo TSA" class="logo">
+    <h2>Tính điểm xét tuyển tài năng 1.3</h2>
+
+    <label for="math">Điểm Toán</label>
+    <input type="number" id="math" min="0" max="10" step="0.1">
+
+    <label for="literature">Điểm Ngữ Văn</label>
+    <input type="number" id="literature" min="0" max="10" step="0.1">
+
+    <label for="subject3">Điểm môn 3 (Lý/Hóa/Sinh/Tin)</label>
+    <input type="number" id="subject3" min="0" max="10" step="0.1">
+
+    <label for="main">Thành tích chính</label>
+    <select id="main">
+      <option value="50">Giải Nhất quốc gia</option>
+      <option value="45">Giải Nhì quốc gia</option>
+      <option value="40">Giải Ba quốc gia</option>
+      <option value="35">Giải Khuyến khích quốc gia</option>
+      <option value="30">Giải Nhất tỉnh</option>
+      <option value="25">Giải Nhì tỉnh</option>
+      <option value="20">Giải Ba tỉnh</option>
+      <option value="15">Giải Khuyến khích tỉnh</option>
+      <option value="50">Olympia vòng năm</option>
+      <option value="40">Olympia vòng quý</option>
+      <option value="30">Olympia vòng tháng</option>
+      <option value="20">Học sinh chuyên</option>
+    </select>
+
+    <input type="checkbox" id="chuyen">Hệ chuyên
+
+    <label for="bonus">Thành tích thưởng</label>
+    <select id="bonus">
+      <option value="7">IELTS 8.0+</option>
+      <option value="6">IELTS 7.5</option>
+      <option value="5">IELTS 7.0</option>
+      <option value="4">IELTS 6.5</option>
+      <option value="2">Giải Nhì tỉnh khác môn</option>
+      <option value="1">Giải Ba tỉnh khác môn</option>
+      <option value="3">Hoạt động xã hội - Bằng khen</option>
+      <option value="1">Hiến máu</option>
+      <option value="1">Giải Ba KHKT tỉnh khác</option>
+    </select>
+
+    <button onclick="calculateScore()">Tính điểm XTTN</button>
+    <div class="result" id="result"></div>
+
+    <label for="log">Kết quả lưu lại:</label>
+    <textarea id="log" readonly></textarea>
+    <button onclick="saveResult()">Lưu kết quả</button>
+  </div>
+
+  <script>
+    function calculateScore() {
+      const math = parseFloat(document.getElementById("math").value) || 0;
+      const literature = parseFloat(document.getElementById("literature").value) || 0;
+      const subject3 = parseFloat(document.getElementById("subject3").value) || 0;
+      const main = parseFloat(document.getElementById("main").value);
+      const bonus = parseFloat(document.getElementById("bonus").value);
+
+      const academic = ((math * 3 + literature + subject3 * 2) * 4) / 6;
+      const chuyen = document.getElementById("chuyen")
+      const chuyenBonus = chuyen.checked ? 20 : 0;
+
+      const total = Math.min(academic + main + bonus + chuyenBonus, 100);
+
+      document.getElementById("result").innerText = `Tổng điểm XTTN của bạn là: ${total.toFixed(2)} / 100`;
+    }
+
+    function saveResult() {
+      const math = document.getElementById("math").value;
+      const literature = document.getElementById("literature").value;
+      const subject3 = document.getElementById("subject3").value;
+      const mainText = document.getElementById("main").options[document.getElementById("main").selectedIndex].text;
+      const bonusText = document.getElementById("bonus").options[document.getElementById("bonus").selectedIndex].text;
+      const result = document.getElementById("result").innerText;
+
+      const logEntry = `Toán: ${math}, Văn: ${literature}, Môn 3: ${subject3}, Thành tích chính: ${mainText}, Thưởng: ${bonusText} => ${result}\n`;
+      document.getElementById("log").value += logEntry;
+    }
+  </script>
+</body>
+
+</html>
